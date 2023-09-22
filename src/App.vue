@@ -1,39 +1,36 @@
 <script setup lang="ts">
-import {message} from 'ant-design-vue';
-import {invoke} from "@tauri-apps/api";
-import {ref} from "vue";
-
+import { message } from "ant-design-vue";
+import { invoke } from "@tauri-apps/api";
+import { ref } from "vue";
 
 const [messageApi, contextHolder] = message.useMessage();
 
 const info = () => {
-  messageApi.info('Hello, Ant Design Vue!');
+  messageApi.info("Hello, Ant Design Vue!");
 };
 
 let msg = ref("Click here to get a message from backend");
 
 const getMessage = () => {
-  invoke('get_message').then((res: string) => {
-    msg.value = res
-  })
+  invoke("get_message").then((res) => {
+    msg.value = res as string;
+  });
 };
 
-let num = ref(50)
+let num = ref(50);
 
 const plusFive = () => {
-  invoke('plus_five', {number: num.value}).then((res: number) => {
-    num.value = res
-  })
+  invoke("plus_five", { number: num.value }).then((res) => {
+    num.value = res as number;
+  });
 };
-
-
 </script>
 
 <template>
   <div id="app">
-    <a-space direction="vertical" align="center">
+    <a-space direction="vertical" :align="'center'">
       <a-space>
-        <context-holder/>
+        <context-holder />
         <a-button type="primary" @click="info">Display ant-design normal message</a-button>
       </a-space>
       <a-space>
