@@ -16,7 +16,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: ./*.json
+          artifacts: ./*.yaml
           prerelease: true
           tag: v9.9.9
 
