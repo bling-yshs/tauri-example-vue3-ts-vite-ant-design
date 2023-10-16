@@ -12,24 +12,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: Create Release
+        uses: ncipollo/release-action@v1
         with:
-          version: 8
+          allowUpdates: true
+          artifacts: ./*.json
+          prerelease: true
 
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'pnpm'
-
-      - name: Build
-        run: |
-          pnpm install
-          pnpm tauri-build
-
-      - name: Upload build
-        uses: actions/upload-artifact@v3
-        with:
-          name: msi
-          path: ./src-tauri/target/release/bundle/msi/*.msi
+#      - name: Setup pnpm
+#        uses: pnpm/action-setup@v2
+#        with:
+#          version: 8
+#
+#      - name: Setup node
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: 18
+#          cache: 'pnpm'
+#
+#      - name: Build
+#        run: |
+#          pnpm install
+#          pnpm tauri-build
+#
+#      - name: Upload build
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: msi
+#          path: ./src-tauri/target/release/bundle/msi/*.msi
