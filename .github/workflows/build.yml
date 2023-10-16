@@ -1,10 +1,9 @@
-name: Build Tauri App
+name: Auto Build Tauri App On Push
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build:
@@ -38,7 +37,7 @@ jobs:
       - name: Create ci release
         uses: ncipollo/release-action@v1
         with:
-          name: ci-build
+          name: CI-Build
           generateReleaseNotes: true
           allowUpdates: true
           removeArtifacts: true
