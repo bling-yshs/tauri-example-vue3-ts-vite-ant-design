@@ -15,6 +15,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
+          removeArtifacts: true
           artifacts: ./*.yaml
           prerelease: true
           tag: v9.9.9
