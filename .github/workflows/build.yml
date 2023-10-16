@@ -10,9 +10,32 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Create Release
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Build release
+        run: |
+          pnpm install
+          pnpm tauri-build
+
+      - name: Upload build to artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: msi
+          path: ./src-tauri/target/release/bundle/msi/*.msi
+
+      - name: Create ci release
         uses: ncipollo/release-action@v1
         with:
           name: ci-build
@@ -22,25 +45,3 @@ jobs:
           artifacts: ./src-tauri/target/release/bundle/msi/*.msi
           prerelease: true
           tag: v9.9.9
-
-#      - name: Setup pnpm
-#        uses: pnpm/action-setup@v2
-#        with:
-#          version: 8
-#
-#      - name: Setup node
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 18
-#          cache: 'pnpm'
-#
-#      - name: Build
-#        run: |
-#          pnpm install
-#          pnpm tauri-build
-#
-#      - name: Upload build
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: msi
-#          path: ./src-tauri/target/release/bundle/msi/*.msi
