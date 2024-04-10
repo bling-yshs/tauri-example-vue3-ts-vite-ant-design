@@ -1,3 +1,6 @@
+# This project is outdated. For the latest version, please see https://github.com/yooneskh/vite-tauri-template.
+
+
 # tauri-example-vue3-ts-vite-ant-design
 
 tauri-example-vue3-ts-vite-ant-design. 一个 tauri 例子，使用 vue3 + typescript + vite + ant-design
